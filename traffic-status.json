@@ -1,0 +1,15 @@
+{
+  "checked_at": null,
+  "status": "unknown",
+  "es": "Estado pendiente de la primera revisión automática.",
+  "pt": "Estado aguardando a primeira consulta automática.",
+  "source_url": "https://www.gob.mx/comisionambiental/archivo/prensa",
+  "valid_until": null,
+  "vehicle": {
+    "hologram": "0",
+    "registration_state": null,
+    "plate": null,
+    "verification_valid_until": null
+  },
+  "last_alert_key": null
+}
