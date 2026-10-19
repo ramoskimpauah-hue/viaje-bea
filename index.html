@@ -16,16 +16,51 @@
   card.className="traffic";card.id="traffic";card.setAttribute("aria-labelledby","traffic-title");
   document.getElementById("notice").before(card);
   const copy={
-    es:{title:"🚗 Hoy No Circula · CDMX",date:"Estancia en CDMX: 22–25 de octubre de 2026",rule:"Holograma 0 vigente: exento del Hoy No Circula habitual si las placas y la verificación son de Querétaro.",detail:"En esas condiciones pueden circular jueves, viernes, sábado y domingo. Llevar certificado vigente, tarjeta de circulación y licencia.",pending:"⚠️ Contingencia ambiental: pendiente de consultar. Puede restringir también al holograma 0 según la terminación de placa.",note:"Este apartado muestra la regla habitual, no un estado en tiempo real. La entidad de las placas y la vigencia del holograma están pendientes de confirmar. Revisar el comunicado oficial antes de cada salida.",came:"Consultar contingencias CAMe ↗",sedema:"Reglas oficiales SEDEMA ↗",updated:"Reglas consultadas: 19 de octubre de 2026."},
-    pt:{title:"🚗 Hoy No Circula · CDMX",date:"Estadia na CDMX: 22–25 de outubro de 2026",rule:"Holograma 0 válido: isento da restrição habitual se a placa e a inspeção veicular forem de Querétaro.",detail:"Nessas condições, o carro pode circular de quinta a domingo. Levar certificado válido, documento do veículo e habilitação.",pending:"⚠️ Contingência ambiental: consulta pendente. Pode restringir também o holograma 0 conforme o final da placa.",note:"Esta seção mostra a regra habitual, não o estado em tempo real. O estado da placa e a validade do holograma ainda precisam ser confirmados. Consultar o comunicado oficial antes de cada saída.",came:"Consultar contingências CAMe ↗",sedema:"Regras oficiais SEDEMA ↗",updated:"Regras consultadas em 19 de outubro de 2026."}
+    es:{title:"🚗 Hoy No Circula · CDMX",date:"Estancia en CDMX: 22–25 de octubre de 2026",rule:"Holograma 0 vigente: exento del Hoy No Circula habitual si las placas y la verificación son de Querétaro.",detail:"En esas condiciones pueden circular jueves, viernes, sábado y domingo. Llevar certificado vigente, tarjeta de circulación y licencia.",pending:"⚠️ Contingencia ambiental: pendiente de consultar. Puede restringir también al holograma 0 según la terminación de placa.",note:"Estado revisado por tareas programadas; no es una consulta en tiempo real. La entidad de las placas y la vigencia del holograma están pendientes de confirmar. Revisar el comunicado oficial antes de cada salida.",came:"Consultar contingencias CAMe ↗",sedema:"Reglas oficiales SEDEMA ↗",updated:"Reglas consultadas: 19 de octubre de 2026."},
+    pt:{title:"🚗 Hoy No Circula · CDMX",date:"Estadia na CDMX: 22–25 de outubro de 2026",rule:"Holograma 0 válido: isento da restrição habitual se a placa e a inspeção veicular forem de Querétaro.",detail:"Nessas condições, o carro pode circular de quinta a domingo. Levar certificado válido, documento do veículo e habilitação.",pending:"⚠️ Contingência ambiental: consulta pendente. Pode restringir também o holograma 0 conforme o final da placa.",note:"Estado consultado por tarefas programadas; não é uma consulta em tempo real. O estado da placa e a validade do holograma ainda precisam ser confirmados. Consultar o comunicado oficial antes de cada saída.",came:"Consultar contingências CAMe ↗",sedema:"Regras oficiais SEDEMA ↗",updated:"Regras consultadas em 19 de outubro de 2026."}
   };
+  let trafficStatus=null;
   function updateTraffic(){
     const t=copy[lang==="pt"?"pt":"es"];
     card.innerHTML='<h2 id="traffic-title">'+t.title+'</h2><p>'+t.date+'</p><p class="traffic-rule">'+t.rule+'</p><p>'+t.detail+'</p><p class="traffic-pending">'+t.pending+'</p><div class="traffic-links"><a href="https://www.gob.mx/comisionambiental/archivo/prensa" target="_blank" rel="noopener noreferrer">'+t.came+'</a><a href="https://sedema.cdmx.gob.mx/programas/programa/verificacion-vehicular" target="_blank" rel="noopener noreferrer">'+t.sedema+'</a></div><small>'+t.note+' '+t.updated+'</small>';
+    const live=document.createElement("div");
+    live.setAttribute("aria-live","polite");
+    const now=Date.now(),checked=trafficStatus&&Date.parse(trafficStatus.checked_at);
+    const expiry=trafficStatus&&Date.parse(trafficStatus.valid_until);
+    const fresh=Number.isFinite(checked)&&checked<=now+300000&&now-checked<26*3600000&&Number.isFinite(expiry)&&expiry>now;
+    const p=document.createElement("p");p.className="traffic-pending";
+    p.textContent=fresh ? (lang==="pt"?trafficStatus.pt:trafficStatus.es) : (lang==="pt"?"⚠️ Estado atual sem confirmação recente. Consulte a CAMe antes de sair.":"⚠️ Estado actual sin confirmación reciente. Consulta CAMe antes de salir.");
+    live.append(p);
+    if(Number.isFinite(checked)){
+      const stamp=document.createElement("small");
+      stamp.textContent=(lang==="pt"?"Última consulta: ":"Última revisión: ")+new Intl.DateTimeFormat(lang==="pt"?"pt-BR":"es-MX",{dateStyle:"medium",timeStyle:"short",timeZone:"America/Mexico_City"}).format(new Date(checked));
+      live.append(stamp);
+    }
+    if(fresh&&trafficStatus.source_url){
+      try{const u=new URL(trafficStatus.source_url);
+        if(u.protocol==="https:"&&(u.hostname==="www.gob.mx"||u.hostname==="gob.mx"||u.hostname==="sedema.cdmx.gob.mx"||u.hostname==="www.sedema.cdmx.gob.mx")){
+          const link=document.createElement("a");link.href=u.href;link.target="_blank";link.rel="noopener noreferrer";link.textContent=lang==="pt"?"Ver comunicado consultado ↗":"Ver comunicado consultado ↗";live.append(link);
+        }
+      }catch(e){}
+    }
+    const pending=card.querySelector(".traffic-pending");
+    pending.replaceWith(live);
   }
   document.getElementById("es").addEventListener("click",updateTraffic);
   document.getElementById("pt").addEventListener("click",updateTraffic);
+  async function refreshTraffic(){
+    try{
+      const response=await fetch("/traffic-status.json",{cache:"no-store"});
+      if(!response.ok)throw new Error("Status unavailable");
+      const data=await response.json();
+      if(!["unknown","clear","contingency"].includes(data.status)||typeof data.es!=="string"||typeof data.pt!=="string")throw new Error("Invalid status");
+      trafficStatus=data;
+    }catch(e){trafficStatus=null;}
+    updateTraffic();
+  }
   updateTraffic();
+  refreshTraffic();
+  setInterval(refreshTraffic,300000);
 })();
 </script>
 </body></html>
