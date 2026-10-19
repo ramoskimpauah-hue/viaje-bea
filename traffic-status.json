@@ -7,10 +7,11 @@
   "valid_until": null,
   "vehicle": {
     "hologram": "0",
-    "registration_state": null,
+    "registration_state": "Querétaro",
     "plate": "UPC472K",
     "verification_valid_until": null,
     "verification_state": "Querétaro",
+    "verification_year": 2026,
     "sticker_color": "verde"
   },
   "last_alert_key": null
