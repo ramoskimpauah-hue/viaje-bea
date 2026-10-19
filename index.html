@@ -6,4 +6,26 @@
 <div class="hero"><div><b id="daysLabel">19 días de viaje</b><span id="route">CDMX · Querétaro · Guanajuato · San Miguel · Sierra Gorda</span></div><button id="todayBtn">✨ Ver hoy</button><div class="countdown" id="countdown" aria-live="polite"></div></div></header>
 <main><nav id="filters"></nav><section id="notice"></section><section id="timeline"></section><section class="budget" id="budget"></section></main>
 <footer><b>Viaje de Bea · México 2026</b><span id="footerText">Hecho para disfrutar el viaje, no para correr ✨</span></footer>
-<script src="app.js"></script></body></html>
+<script src="app.js"></script>
+<style>
+.traffic{margin:0 0 18px;padding:18px;background:#fff;border:1px solid var(--line);border-radius:18px;box-shadow:0 4px 14px #513b2210}.traffic h2{font-size:20px;margin:0 0 6px}.traffic p{line-height:1.5;margin:8px 0;font-size:14px}.traffic .traffic-rule{color:var(--nopal2);font-weight:750}.traffic .traffic-pending{background:#fff0bd;border-radius:10px;padding:12px;color:#65450b}.traffic .traffic-links{display:flex;flex-wrap:wrap;gap:10px;margin-top:12px}.traffic a{min-height:44px;padding:11px 14px;border:1px solid #cfe3f5;border-radius:11px;background:#eaf4ff;color:#12588f;font-size:13px;font-weight:750;text-decoration:none}.traffic small{display:block;color:var(--muted);line-height:1.5;margin-top:12px}
+</style>
+<script>
+(function(){
+  const card=document.createElement("section");
+  card.className="traffic";card.id="traffic";card.setAttribute("aria-labelledby","traffic-title");
+  document.getElementById("notice").before(card);
+  const copy={
+    es:{title:"🚗 Hoy No Circula · CDMX",date:"Estancia en CDMX: 22–25 de octubre de 2026",rule:"Holograma 0 vigente: exento del Hoy No Circula habitual si las placas y la verificación son de Querétaro.",detail:"En esas condiciones pueden circular jueves, viernes, sábado y domingo. Llevar certificado vigente, tarjeta de circulación y licencia.",pending:"⚠️ Contingencia ambiental: pendiente de consultar. Puede restringir también al holograma 0 según la terminación de placa.",note:"Este apartado muestra la regla habitual, no un estado en tiempo real. La entidad de las placas y la vigencia del holograma están pendientes de confirmar. Revisar el comunicado oficial antes de cada salida.",came:"Consultar contingencias CAMe ↗",sedema:"Reglas oficiales SEDEMA ↗",updated:"Reglas consultadas: 19 de octubre de 2026."},
+    pt:{title:"🚗 Hoy No Circula · CDMX",date:"Estadia na CDMX: 22–25 de outubro de 2026",rule:"Holograma 0 válido: isento da restrição habitual se a placa e a inspeção veicular forem de Querétaro.",detail:"Nessas condições, o carro pode circular de quinta a domingo. Levar certificado válido, documento do veículo e habilitação.",pending:"⚠️ Contingência ambiental: consulta pendente. Pode restringir também o holograma 0 conforme o final da placa.",note:"Esta seção mostra a regra habitual, não o estado em tempo real. O estado da placa e a validade do holograma ainda precisam ser confirmados. Consultar o comunicado oficial antes de cada saída.",came:"Consultar contingências CAMe ↗",sedema:"Regras oficiais SEDEMA ↗",updated:"Regras consultadas em 19 de outubro de 2026."}
+  };
+  function updateTraffic(){
+    const t=copy[lang==="pt"?"pt":"es"];
+    card.innerHTML='<h2 id="traffic-title">'+t.title+'</h2><p>'+t.date+'</p><p class="traffic-rule">'+t.rule+'</p><p>'+t.detail+'</p><p class="traffic-pending">'+t.pending+'</p><div class="traffic-links"><a href="https://www.gob.mx/comisionambiental/archivo/prensa" target="_blank" rel="noopener noreferrer">'+t.came+'</a><a href="https://sedema.cdmx.gob.mx/programas/programa/verificacion-vehicular" target="_blank" rel="noopener noreferrer">'+t.sedema+'</a></div><small>'+t.note+' '+t.updated+'</small>';
+  }
+  document.getElementById("es").addEventListener("click",updateTraffic);
+  document.getElementById("pt").addEventListener("click",updateTraffic);
+  updateTraffic();
+})();
+</script>
+</body></html>
