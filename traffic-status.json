@@ -1,9 +1,9 @@
 {
-  "checked_at": null,
+  "checked_at": "2026-10-20T08:56:14-06:00",
   "status": "unknown",
-  "es": "Estado pendiente de la primera revisión automática.",
-  "pt": "Estado aguardando a primeira consulta automática.",
-  "source_url": "https://www.gob.mx/comisionambiental/archivo/prensa",
+  "es": "⚠️ No fue posible confirmar un comunicado vigente de CAMe esta mañana. Aire CDMX reportó calidad aceptable a las 07:00 del 20 de octubre, pero esto no basta para descartar una contingencia. Con holograma 0 vigente, UPC472K circula normalmente salvo restricciones extraordinarias; consulta CAMe antes de salir.",
+  "pt": "⚠️ Não foi possível confirmar um comunicado vigente da CAMe nesta manhã. O Aire CDMX informou qualidade aceitável às 07:00 de 20 de outubro, mas isso não é suficiente para descartar uma contingência. Com holograma 0 válido, o UPC472K circula normalmente salvo restrições extraordinárias; consulte a CAMe antes de sair.",
+  "source_url": "https://www.aire.cdmx.gob.mx/ultima-hora-reporte.php",
   "valid_until": null,
   "vehicle": {
     "hologram": "0",
