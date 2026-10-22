@@ -1,8 +1,8 @@
 {
   "checked_at": "2026-10-20T08:56:14-06:00",
   "status": "unknown",
-  "es": "⚠️ No fue posible confirmar un comunicado vigente de CAMe esta mañana. Aire CDMX reportó calidad aceptable a las 07:00 del 20 de octubre, pero esto no basta para descartar una contingencia. Con holograma 0 vigente, UPC472K circula normalmente salvo restricciones extraordinarias; consulta CAMe antes de salir.",
-  "pt": "⚠️ Não foi possível confirmar um comunicado vigente da CAMe nesta manhã. O Aire CDMX informou qualidade aceitável às 07:00 de 20 de outubro, mas isso não é suficiente para descartar uma contingência. Com holograma 0 válido, o UPC472K circula normalmente salvo restrições extraordinárias; consulte a CAMe antes de sair.",
+  "es": "⚠️ No fue posible confirmar un comunicado vigente de CAMe en la última revisión. UPC472K tiene holograma 0 de Querétaro; el certificado físico fue emitido el 25 de mayo de 2026 e indica vigencia hasta octubre/noviembre de 2026, sin día exacto. Puede circular bajo el programa habitual salvo restricciones extraordinarias por contingencia.",
+  "pt": "⚠️ Não foi possível confirmar um comunicado vigente da CAMe na última verificação. O UPC472K possui holograma 0 de Querétaro; o certificado físico foi emitido em 25 de maio de 2026 e indica validade até outubro/novembro de 2026, sem dia exato. Pode circular no programa normal, salvo restrições extraordinárias por contingência.",
   "source_url": "https://www.aire.cdmx.gob.mx/ultima-hora-reporte.php",
   "valid_until": null,
   "vehicle": {
@@ -12,7 +12,10 @@
     "verification_valid_until": null,
     "verification_state": "Querétaro",
     "verification_year": 2026,
-    "sticker_color": "verde"
+    "sticker_color": "verde",
+    "verification_date": "2026-05-25",
+    "verification_validity_label": "Hasta octubre/noviembre de 2026 (el certificado no indica día exacto)",
+    "verification_document_confirmed": true
   },
   "last_alert_key": null
 }
