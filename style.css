@@ -9,3 +9,20 @@
 @media(max-width:650px){.countdown{padding:17px 10px}.countdown strong{font-size:64px}.day summary.has-photo{grid-template-columns:55px 1fr 64px}.day-photo{width:64px;height:54px}.photo-credit{display:none}}
 
 .homi{margin:14px 0;padding:16px;border-radius:16px;background:#fff9eb;border:1px solid #ecd4a2;border-left:5px solid #c52f70}.homi h3{margin:0 0 4px;color:#174b37}.homi p{font-size:13px;margin:6px 0 12px}.homi-times{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin:12px 0}.homi-times b{padding:12px 8px;background:#fff;border:1px solid #eadfc9;border-radius:10px;text-align:center;font-size:13px}.homi details{background:white;border:1px solid #eadfc9;border-radius:12px;padding:12px}.homi details summary{display:list-item;min-height:44px;padding:10px 4px;font-weight:850;color:#1768ac;cursor:pointer}.homi ul{padding-left:20px;font-size:13px;line-height:1.55}.homi li{margin:7px 0}.homi-fees>div{display:flex;justify-content:space-between;gap:12px;padding:10px 0;border-top:1px solid #eee4d2;font-size:12px}.homi-fees span{text-align:right}@media(max-width:390px){.homi-times{grid-template-columns:1fr}.homi-fees>div{display:block}.homi-fees span{display:block;text-align:left;margin-top:3px}}
+
+/* Guanajuato day route */
+.gto-route{margin:14px 0 16px;padding:16px;border-radius:18px;background:linear-gradient(145deg,#fff8e9,#fff);border:1px solid #ead7ae;border-left:5px solid var(--cemp);box-shadow:0 5px 16px #513b2212}
+.gto-route-head{display:flex;justify-content:space-between;gap:14px;align-items:start;margin-bottom:14px}
+.gto-route-head h3{margin:0 0 4px;color:var(--nopal2);font-size:17px}
+.gto-route-head p{margin:0;color:var(--muted);font-size:12px}
+.gto-route-head>span{background:var(--bug);color:#fff;padding:7px 9px;border-radius:99px;font-size:10px;font-weight:900;white-space:nowrap}
+.gto-stops{display:grid;grid-template-columns:repeat(3,1fr);gap:8px}
+.gto-stop{position:relative;display:flex;align-items:center;gap:8px;min-height:50px;padding:8px;background:#fff;border:1px solid #eee3cf;border-radius:12px;font-size:11px;font-weight:750}
+.gto-stop b{display:grid;place-items:center;flex:0 0 28px;height:28px;border-radius:50%;background:var(--nopal);color:#fff;font-size:12px}
+.gto-map-actions{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-top:12px}
+.gto-map-actions a{display:flex;align-items:center;justify-content:center;min-height:46px;padding:9px;border-radius:11px;text-decoration:none;text-align:center;font-size:11px;font-weight:850;color:#12588f;background:#eaf4ff;border:1px solid #cfe3f5}
+.gto-map-actions a:nth-child(2){color:#245c3a;background:#edf7ef;border-color:#cfe6d5}
+.gto-map-actions a:nth-child(3){color:#71440b;background:#fff0d9;border-color:#f4d7ad}
+.gto-tip{margin:12px 0 0!important;padding:10px 12px;background:#fff0bd;border-radius:10px;color:#65450b;font-size:11px!important;font-weight:750}
+@media(max-width:650px){.gto-stops{grid-template-columns:1fr 1fr}.gto-map-actions{grid-template-columns:1fr}.gto-map-actions a{min-height:44px}}
+@media(max-width:390px){.gto-stops{grid-template-columns:1fr}}
